@@ -1,49 +1,10 @@
 import { createRoot } from 'react-dom/client';
-import { StrictMode, CSSProperties, useState } from 'react';
-import clsx from 'clsx';
-import { Article } from './components/article/Article';
-import { ArticleParamsForm } from './components/article-params-form/ArticleParamsForm';
-import {
-	ArticleStateType,
-	defaultArticleState,
-} from './constants/articleProps';
+import { StrictMode } from 'react';
+import { App } from './App';
 import './styles/index.scss';
-import styles from './styles/index.module.scss';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
-
-const App = () => {
-	const [state, setState] = useState<ArticleStateType>(defaultArticleState);
-
-	const handleFormClick = (props: ArticleStateType) => {
-		setState(props);
-	};
-
-	const handleResetClick = () => {
-		setState(defaultArticleState);
-	};
-
-	return (
-		<div
-			className={clsx(styles.main)}
-			style={
-				{
-					'--font-family': state.fontFamilyOption.value,
-					'--font-size': state.fontSizeOption.value,
-					'--font-color': state.fontColorOption.value,
-					'--container-width': state.contentWidthOption.value,
-					'--bg-color': state.backgroundColorOption.value,
-				} as CSSProperties
-			}>
-			<ArticleParamsForm
-				onResetClick={handleResetClick}
-				onSubmitClick={handleFormClick}
-			/>
-			<Article />
-		</div>
-	);
-};
 
 root.render(
 	<StrictMode>
